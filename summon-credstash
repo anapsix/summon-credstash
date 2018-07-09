@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+# example args: dev-credstash/password
+
+if [ "x$1x" == 'xx' ]; then
+  echo >&2 "Usage: $0 <dynamodb/key>"
+  exit 1
+fi
+
+table_name="${1%%/*}"
+secret_key="${1#*/}"
+
+# echo >&2 "Table Name: ${table_name}"
+# echo >&2 "Key: ${secret_key}"
+
+credstash -t ${table_name} get -n ${secret_key}
